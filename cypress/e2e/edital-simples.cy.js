@@ -11,15 +11,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
   it.only('Realiza login no sistema e cria um edital simples', () => {
-    cy.visit('/edital')
-    //Teste edital simples, se houver mais de um teste, o it.only executa apenas esse teste.
-    cy.get('[data-cy="nav-group-edital"]').click(); //Clica na aba Editais
-    cy.get('[data-cy="nav-item-publicar-edital"]').click(); //Clica na opção Editais para acessar da página de Editais
-    cy.get('[data-cy="add-publicar-edital"]').click(); //Clica no botão "Adicionar" para criação de um novo Edital
-    cy.get('[data-cy="nome"]').type(
-      'Grupo-01 E.S. 005/2025 joão-neves', //Edite essa linha para preencher o nome do Edital
-      { delay: 0 },
-    ); //Preenche o campo "Nome" do Edital
+    cy.preencheEdital();
     cy.get('[data-cy="restricoes"]').click(); //Clica na aba Restrições para seguir para a página de Restrições
     cy.get('[data-cy="definirDuracaoProjetoEmMeses"]').check(); //Marca a opção "Definir Duração do Projeto em Meses"
     cy.get('[data-cy="duracaoProjetoEmMeses"]').type('6'); //Preenche o campo "Duração do Projeto em Meses com o valor 6"
