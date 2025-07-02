@@ -63,25 +63,24 @@ cy.get('[data-cy="chamadaUnsaved.termino"]').type(formatDateTime(nextYear));;
     cy.get('[data-cy="programaId"]').click(); //Clica no campo de seleção de Programa
     cy.get('[data-cy-index="programaId-item-0"]').click(); //Seleciona o primeiro Programa da lista de Programas
 
-    /* Perguntas
+    // Perguntas
     cy.get('[data-cy="perguntas"]').click(); //Clica na aba Perguntas para seguir para a página de Perguntas
 
     cy.get('[data-cy="indicadores-de-producao"]').click(); //Clica no botão "Adicionar Pergunta" para criar uma nova Pergunta
     cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar Indicador" para criar o primeiro Indicador de Produção
     cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click(); //Clica no campo de seleção de Indicador de Produção
-    cy.get('#mui-59-option-0').click(); //Seleciona o primeiro da lista
+    cy.get('[data-cy="producao-bibliog"]').click(); //Seleciona o primeiro da lista
     cy.get('[data-cy="indicadorProducao-confirmar"]').click();
 
     cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar Indicador" para criar segundo Indicador de Produção
     cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click(); //Clica no campo de seleção de Indicador de Produção
-    cy.get('#mui-59-option-1').click(); // Seleciona o segundo da lista
+    cy.get('[data-cy="producao-cultura"]').click(); // Seleciona o segundo da lista
     cy.get('[data-cy="indicadorProducao-confirmar"]').click();
 
     cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar Indicador" para criar terceiro Indicador de Produção
     cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click(); //Clica no campo de seleção de Indicador de Produção
-    cy.get('#mui-59-option-2').click(); // Seleciona o terceiro da lista
+    cy.get('[data-cy="producao-tecnica"]').click(); // Seleciona o terceiro da lista
     cy.get('[data-cy="indicadorProducao-confirmar"]').click();
-*/
         
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
     cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
