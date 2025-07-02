@@ -1,4 +1,5 @@
 import { getCurrentDateTime } from '../helpers/date.helper';
+import moment from 'moment';
 
 Cypress.Commands.add("preencheEdital",(nivel)=>{
      //Teste edital simples, se houver mais de um teste, o it.only executa apenas esse teste.
@@ -14,14 +15,21 @@ Cypress.Commands.add("preencheEdital",(nivel)=>{
   switch(nivel){
     case "Medio":
       cy.intercept("/estado?withDeleted=false").as("estados")
-      cy.get('[data-cy="termo-de-aceite"]').click()//Clica na aba Termo de Aceite das Informações do Edital
-      cy.get('p[data-placeholder="Digite algum texto aqui para começar..."]').click().realType();
-      cy.get('[data-cy="texto-do-edital"]').click()
-      cy.get('p[data-placeholder="Digite algum texto aqui para começar..."]').invoke('val').then((v)=>{
-        v = "Adicionando texto do edital";
-      });
-      cy.get('data-cy="abrangencia"').click();//Clica na aba de Abrangência
+      cy.get('[data-cy="termo-de-aceite"]').click()//Clica na aba Termo de Aceite das Informações do Edital      
+      // Termo de Aceite
+      cy.get('[data-cy="termo-de-aceite"]').click(); //Clica na aba Termo de Aceite para seguir para a página de Termo de Aceite
+      cy.get('[data-cy="termoDeAceite"]').click().realType('Aceito os termos de aceite')// Encontra a área editável do CKEditor, clica para ativar e depois digita.
+
+      // Texto do Edital
+      cy.get('[data-cy="texto-do-edital"]').click(); //Clica na aba
+      cy.get('[data-cy="texto"]').realType('Texto completo do Edital Medio.'); //Preenche o campo "Texto do Edital" com o texto "Texto completo do Edital Médio."
+
+      // Abrangência
+      cy.get('[data-cy="abrangencia"]').click(); 
       cy.wait("@estados").then((e)=>{
+        for(let i=0;i<3;i++){
+          cy.contains(e.response.body.data[Math.floor(Math.random() * e.response.body.count)].nome).click();
+        }
         console.log(e.response.body.data);
       });
 
@@ -33,14 +41,41 @@ Cypress.Commands.add("preencheEdital",(nivel)=>{
   }
  
 });
-Cypress.Commands.add("preencheSubimissao",()=>{
+Cypress.Commands.add("preencheCronograma",()=>{
     cy.get('[data-cy="cronograma"]').click(); //Clica na aba Cronograma para seguir para a página de Cronograma
     cy.get('[data-cy="periodo-de-submissao"]').click(); //Clica na aba Período de Submissão para seguir para a página de Período de Submissão
     cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar um novo Período de Submissão
-    cy.get('[data-cy="chamadaUnsaved.inicio"]').type(getCurrentDateTime()); //Preenche o campo "Início" do Período de Submissão com a data do dia de hoje
-    cy.get('[data-cy="chamadaUnsaved.termino"]').type(getCurrentDateTime({ addYears: 1 })); //Preenche o campo "Término" do Período de Submissão com a data do dia de hoje + 1 ano
+    cy.get('[data-cy="chamadaUnsaved.inicio"]').type(moment().format("DD/MM/YYYY HH:mm:ss"));//Preenche o campo "Início" do Período de Submissão com a data do dia de hoje
+    cy.get('[data-cy="chamadaUnsaved.termino"]').type(moment().add(1,'year').format("DD/MM/YYYY HH:mm:ss"));//Preenche o campo "Término" do Período de Submissão com a data do dia de hoje + 1 ano
     cy.get('[data-cy="chamada-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações do Período de Submissão
   });
+Cypress.Commands.add("preencheOrcamento",()=>{
+    // Orçamento
+    cy.get('[data-cy="orcamento"]').click(); //Clica na aba Orçamento para exibir as opções de Orçamento
+    cy.get('[data-cy="programa"]').click(); //Clica em Programa para seguir para a página de Programa
+    cy.get('[data-cy="programaId"]').click(); //Clica no campo de seleção de Programa
+    cy.get('[data-cy-index="programaId-item-0"]').click(); //Seleciona o primeiro Programa da lista de Programas
+});
+Cypress.Commands.add("preenchePergunta", ()=>{
+      // Perguntas
+      cy.get('[data-cy="perguntas"]').click(); //Clica na aba Perguntas para seguir para a página de Perguntas
+  
+      cy.get('[data-cy="indicadores-de-producao"]').click(); //Clica no botão "Adicionar Pergunta" para criar uma nova Pergunta
+      cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar Indicador" para criar o primeiro Indicador de Produção
+      cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click(); //Clica no campo de seleção de Indicador de Produção
+      cy.get('[data-cy="producao-bibliog"]').click(); //Seleciona o primeiro da lista
+      cy.get('[data-cy="indicadorProducao-confirmar"]').click();
+  
+      cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar Indicador" para criar segundo Indicador de Produção
+      cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click(); //Clica no campo de seleção de Indicador de Produção
+      cy.get('[data-cy="producao-cultura"]').click(); // Seleciona o segundo da lista
+      cy.get('[data-cy="indicadorProducao-confirmar"]').click();
+  
+      cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar Indicador" para criar terceiro Indicador de Produção
+      cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click(); //Clica no campo de seleção de Indicador de Produção
+      cy.get('[data-cy="producao-tecnica"]').click(); // Seleciona o terceiro da lista
+      cy.get('[data-cy="indicadorProducao-confirmar"]').click();
+});
 Cypress.Commands.add("selecionaPrograma",()=>{
     cy.get('[data-cy="orcamento"]').click(); //Clica na aba Orçamento para exibir as opções de Orçamento
     cy.get('[data-cy="programa"]').click(); //Clica em Programa para seguir para a página de Programa
