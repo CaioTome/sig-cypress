@@ -1,5 +1,7 @@
+import { getCurrentDateTime } from '../helpers/date.helper';
+import moment from 'moment';
 
-describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas',()=>{
+describe('Teste de E.M. (Edital Médio)',()=>{
       beforeEach(() => {
     // Gancho em nível raíz
     // executa antes de realizar cada teste(it)
@@ -10,7 +12,13 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas',(
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
     it('Realiza login no sistema e cria um edital medio',()=>{
+      console.log(moment().format("DD/MM/YYYY HH:mm:ss"))
         cy.preencheEdital("Medio");
+        cy.preencheCronograma();
+        cy.preencheOrcamento();
+
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
+        cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
     });
 });
 // ## Atividade 1 - Realizar o Teste Edital Médio
