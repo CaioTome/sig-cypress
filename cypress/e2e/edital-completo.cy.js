@@ -12,11 +12,17 @@ describe('Teste de E.M. (Edital Médio)', () => {
   });
 
   it('Cria um edital completo conforme especificação', () => {
-
+    cy.intercept("POST","/edital").as("criarEdital")
     // Identificação do Edital
     cy.preencheEdital("Completo");
     cy.preencheCronograma();
     cy.preencheOrcamento("Completo");
     cy.preenchePergunta();
+    cy.get('[data-cy="menu-salvar"]').click();
+    cy.wait("@criarEdital").then((req)=>{
+      cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
+      expect(req.response.statusCode).to.equal(201);
+    cy.get('table[aria-labelledby="tableTitle"]').should("contain","Grupo-06 E.S. ");
+    });
   });
 });

@@ -85,6 +85,7 @@ Cypress.Commands.add("preencheOrcamento",(nivel)=>{
         cy.get('[data-cy="editalRubricaUnsaved.naturezaDespesaId"]').click(); //Clica no campo de seleção de Natureza da Despesa
         cy.get('[data-cy="custeio"]').click(); //Seleciona o Tipo de Rubrica "Custeio" da lista de Tipos de Rubricas
         cy.get('[data-cy="editalRubrica-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações da Rubrica
+        cy.wait(1000);
         //Rubrica2
         cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar uma nova Rubrica
         cy.get('[data-cy="editalRubricaUnsaved.tipoEditalRubrica"]').click(); //Clica no campo de seleção de Tipo de Rubrica
@@ -92,6 +93,7 @@ Cypress.Commands.add("preencheOrcamento",(nivel)=>{
         cy.get('[data-cy="editalRubricaUnsaved.naturezaDespesaId"]').click(); //Clica no campo de seleção de Natureza da Despesa
         cy.get('[data-cy="capital"]').click(); //Seleciona o Tipo de Rubrica "Custeio" da lista de Tipos de Rubricas
         cy.get('[data-cy="editalRubrica-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações da Rubrica
+        cy.wait(1000);
         //Rubrica3
         cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar uma nova Rubrica
         cy.get('[data-cy="editalRubricaUnsaved.tipoEditalRubrica"]').click(); //Clica no campo de seleção de Tipo de Rubrica
@@ -99,6 +101,7 @@ Cypress.Commands.add("preencheOrcamento",(nivel)=>{
         cy.get('[data-cy="editalRubricaUnsaved.naturezaDespesaId"]').click(); //Clica no campo de seleção de Natureza da Despesa
         cy.get('[data-cy="auxilio-a-pesqui"]').click(); //Seleciona o Tipo de Rubrica "Custeio" da lista de Tipos de Rubricas
         cy.get('[data-cy="editalRubrica-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações da Rubrica
+        cy.wait(1000);
         //Rubrica4
         cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar uma nova Rubrica
         cy.get('[data-cy="editalRubricaUnsaved.tipoEditalRubrica"]').click(); //Clica no campo de seleção de Tipo de Rubrica
@@ -112,36 +115,36 @@ Cypress.Commands.add("preencheOrcamento",(nivel)=>{
         cy.get('[data-cy="faixas-de-financiamento"]').click(); //Clica na aba Faixas de Financiamento para seguir para a página de Faixas de Financiamento
 
         cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar uma nova Faixa de Financiamento
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').type('0001'); // Valor Mínimo invertido
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').type('0005'); // Valor Máximo invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').clear().type('0001'); // Valor Mínimo invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').clear().type('0005'); // Valor Máximo invertido
         cy.get('[data-cy="faixaFinanciamentoUnsaved.nome"]').type('Faixa 1');
         cy.get('[data-cy="faixaFinanciamentoUnsaved.observacao"]').type('Descrição da Faixa 1');
         cy.get('[data-cy="faixaFinanciamento-confirmar"]').click();
-
+        cy.wait(1000);
         cy.get('[data-cy="add-button"]').click(); // Segunda faixa
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').type('1005'); // invertido
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').type('00000000000001'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').clear().type('0105'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').clear().type('70520'); // invertido
         cy.get('[data-cy="faixaFinanciamentoUnsaved.nome"]').type('Faixa 2');
         cy.get('[data-cy="faixaFinanciamentoUnsaved.observacao"]').type('Descrição da Faixa 2');
         cy.get('[data-cy="faixaFinanciamento-confirmar"]').click();
-
+        cy.wait(1000);
         cy.get('[data-cy="add-button"]').click(); // Terceira faixa
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').type('011210'); // invertido
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').type('00000000002'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').clear().type('011210'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').clear().type('1000000000023232'); // invertido
         cy.get('[data-cy="faixaFinanciamentoUnsaved.nome"]').type('Faixa 3');
         cy.get('[data-cy="faixaFinanciamentoUnsaved.observacao"]').type('Descrição da Faixa 3');
         cy.get('[data-cy="faixaFinanciamento-confirmar"]').click();
-
+        cy.wait(1000);
         cy.get('[data-cy="add-button"]').click(); // Quarta faixa
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').type('02222'); // invertido
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').type('00555'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').clear().type('02222'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').clear().type('05552'); // invertido
         cy.get('[data-cy="faixaFinanciamentoUnsaved.nome"]').type('Faixa 4');
         cy.get('[data-cy="faixaFinanciamentoUnsaved.observacao"]').type('Descrição da Faixa 4');
         cy.get('[data-cy="faixaFinanciamento-confirmar"]').click();
-
+        cy.wait(1000);
         cy.get('[data-cy="add-button"]').click(); // Quinta faixa
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').type('105'); // invertido
-        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').type('100000001'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]').clear().type('105'); // invertido
+        cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]').clear().type('205'); // invertido
         cy.get('[data-cy="faixaFinanciamentoUnsaved.nome"]').type('Faixa 5');
         cy.get('[data-cy="faixaFinanciamentoUnsaved.observacao"]').type('Descrição da Faixa 5');
         cy.get('[data-cy="faixaFinanciamento-confirmar"]').click();
