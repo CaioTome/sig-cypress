@@ -14,4 +14,17 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './login'
+import './edital'
+
+//import para lidar com o CKEditor5
+import 'cypress-iframe';
+import 'cypress-real-events';
+
+Cypress.on('uncaught:exception', (err) => {
+  // Ignora erros do CKEditor5 relacionados a "o is null"
+  if (err.message && err.message.includes('o is null')) {
+    return false;
+  }
+  // Permite que outros erros quebrem o teste normalmente
+});
